@@ -26,22 +26,30 @@ var (
 )
 
 const (
+	// V4 Represents the UUID version 4
 	V4 byte = 0x04
+	// V5 Represents the UUID version 5
 	V5 byte = 0x05
 )
 
 const (
 	_ byte = iota
+	// VariantNCS Represents the UUID variant NCS
 	VariantNCS
+	// VariantRFC4122 Represents the UUID variant RFC4122
 	VariantRFC4122
+	// VariantMicrosoft Represents the UUID variant Microsoft
 	VariantMicrosoft
+	// VariantFuture Represents the UUID variant Future
 	VariantFuture
 )
 
+// Version returns the version of the UUID
 func (u UUID) Version() byte {
 	return u[6] >> 4
 }
 
+// Variant returns the variant of the UUID
 func (u UUID) Variant() byte {
 	switch {
 	case (u[8] >> 7) == 0x00:
@@ -65,6 +73,14 @@ func (u *UUID) setVariant() {
 	u[8] = (u[8]&(0xff>>2) | (0x02 << 6))
 }
 
+// New returns a new UUID based on the string input.
+// It returns Nil if the input is not a valid UUID.
+func New() UUID {
+	return NewV4()
+}
+
+// NewV4 returns a new random UUID.
+// It returns Nil if the input is not a valid UUID.
 func NewV4() UUID {
 	var u UUID
 	if _, err := io.ReadFull(rand.Reader, u[:]); err != nil {
@@ -75,6 +91,8 @@ func NewV4() UUID {
 	return u
 }
 
+// NewV5 returns a new UUID based on the SHA-1 hash of the namespace UUID and name.
+// It returns Nil if the input is not a valid UUID.
 func NewV5(ns UUID, name string) UUID {
 	u := getHash(sha1.New(), ns, []byte(name))
 	u.setVariant()
@@ -90,6 +108,7 @@ func getHash(h hash.Hash, ns UUID, name []byte) UUID {
 	return u
 }
 
+// ToBytes returns the UUID as a byte slice.
 func (u UUID) ToBytes() []byte {
 	return u[:]
 }

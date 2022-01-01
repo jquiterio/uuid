@@ -16,15 +16,18 @@ import (
 	"strings"
 )
 
+// NullUUID is a nullable UUID.
 type NullUUID struct {
 	UUID  UUID
 	Valid bool
 }
 
+// MarshalJSON implements the json.Marshaler interface.
 func (u UUID) MarshalJSON() ([]byte, error) {
 	return json.Marshal(u.String())
 }
 
+// UnmarshalJSON implements the json.Unmarshaler interface.
 func (u *UUID) UnmarshalJSON(b []byte) error {
 	var s string
 	err := json.Unmarshal(b, &s)
@@ -34,6 +37,7 @@ func (u *UUID) UnmarshalJSON(b []byte) error {
 	return u.UnmarshalText(s)
 }
 
+// String returns the UUID in it's canonical form, a 32
 func (u UUID) String() string {
 	buf := make([]byte, 36)
 
@@ -50,6 +54,7 @@ func (u UUID) String() string {
 	return string(buf)
 }
 
+// UnmarshalText implements the encoding.TextUnmarshaler interface.
 func (u *UUID) UnmarshalText(text string) error {
 	d := Parse([]byte(strings.ToLower(text)))
 	if d == Nil {
@@ -58,6 +63,7 @@ func (u *UUID) UnmarshalText(text string) error {
 	return u.UnmarshalBinary(d[:])
 }
 
+// UnmarshalBinary implements the encoding.BinaryUnmarshaler interface.
 func (u *UUID) UnmarshalBinary(data []byte) error {
 	d := Parse(data)
 	if d == Nil {
@@ -67,6 +73,7 @@ func (u *UUID) UnmarshalBinary(data []byte) error {
 	return nil
 }
 
+// Bytes returns the raw UUID bytes.
 func (u UUID) Bytes() []byte {
 	return u[:]
 }
@@ -76,6 +83,7 @@ func (u UUID) Value() (driver.Value, error) {
 	return u.String(), nil
 }
 
+// Scan implements the sql.Scanner interface.
 func (u *UUID) Scan(src interface{}) error {
 	switch src := src.(type) {
 	case UUID:
@@ -91,6 +99,7 @@ func (u *UUID) Scan(src interface{}) error {
 	return errors.New("uuid.Value: invalid UUID")
 }
 
+// Value implements the driver.Valuer interface.
 func (nu NullUUID) Value() (driver.Value, error) {
 	if !nu.Valid {
 		return nil, nil
@@ -98,6 +107,7 @@ func (nu NullUUID) Value() (driver.Value, error) {
 	return nu.UUID.Value()
 }
 
+// Scan implements the sql.Scanner interface.
 func (nu *NullUUID) Scan(src interface{}) error {
 	if src == nil {
 		nu.UUID, nu.Valid = Nil, false
@@ -107,6 +117,7 @@ func (nu *NullUUID) Scan(src interface{}) error {
 	return nu.UUID.Scan(src)
 }
 
+// MarshalJSON implements the json.Marshaler interface.
 func (nu NullUUID) MarshalJSON() ([]byte, error) {
 	if !nu.Valid {
 		return json.Marshal(nil)
@@ -114,6 +125,7 @@ func (nu NullUUID) MarshalJSON() ([]byte, error) {
 	return json.Marshal(nu.UUID)
 }
 
+// UnmarshalJSON implements the json.Unmarshaler interface.
 func (nu *NullUUID) UnmarshalJSON(b []byte) error {
 	if bytes.Equal(b, []byte("null")) {
 		nu.UUID, nu.Valid = Nil, false
