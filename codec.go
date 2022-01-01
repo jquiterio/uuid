@@ -89,12 +89,17 @@ func (u *UUID) Scan(src interface{}) error {
 	case UUID:
 		*u = src
 		return nil
-	case []byte:
-		if len(src) == 16 {
-			return u.UnmarshalBinary(src)
+	// case []byte:
+	// 	if len(src) == 16 {
+	// 		return u.UnmarshalBinary(src)
+	// 	}
+	// case string:
+	// 	return u.UnmarshalText(src)
+	case []byte, string:
+		*u = Parse(src)
+		if *u == Nil {
+			return errors.New("uuid.Scan: Invalid UUID")
 		}
-	case string:
-		return u.UnmarshalText(src)
 	}
 	return errors.New("uuid.Value: invalid UUID")
 }
