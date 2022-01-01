@@ -97,9 +97,7 @@ func (u *UUID) Scan(src interface{}) error {
 	// 	return u.UnmarshalText(src)
 	case []byte, string:
 		*u = Parse(src)
-		if *u == Nil {
-			return errors.New("uuid.Scan: Invalid UUID")
-		}
+		return nil
 	}
 	return errors.New("uuid.Value: invalid UUID")
 }
