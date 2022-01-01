@@ -9,7 +9,6 @@ package uuid
 
 import (
 	"bytes"
-	"database/sql/driver"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
@@ -76,48 +75,6 @@ func (u *UUID) UnmarshalBinary(data []byte) error {
 // Bytes returns the raw UUID bytes.
 func (u UUID) Bytes() []byte {
 	return u[:]
-}
-
-// Value implements the driver.Valuer interface.
-func (u UUID) Value() (driver.Value, error) {
-	return u.String(), nil
-}
-
-// Scan implements the sql.Scanner interface.
-func (u *UUID) Scan(src interface{}) error {
-	switch src := src.(type) {
-	case UUID:
-		*u = src
-		return nil
-	// case []byte:
-	// 	if len(src) == 16 {
-	// 		return u.UnmarshalBinary(src)
-	// 	}
-	// case string:
-	// 	return u.UnmarshalText(src)
-	case []byte, string:
-		*u = Parse(src)
-		return nil
-	}
-	return errors.New("uuid.Value: invalid UUID")
-}
-
-// Value implements the driver.Valuer interface.
-func (nu NullUUID) Value() (driver.Value, error) {
-	if !nu.Valid {
-		return nil, nil
-	}
-	return nu.UUID.Value()
-}
-
-// Scan implements the sql.Scanner interface.
-func (nu *NullUUID) Scan(src interface{}) error {
-	if src == nil {
-		nu.UUID, nu.Valid = Nil, false
-		return nil
-	}
-	nu.Valid = true
-	return nu.UUID.Scan(src)
 }
 
 // MarshalJSON implements the json.Marshaler interface.
