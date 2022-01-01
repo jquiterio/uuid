@@ -14,14 +14,20 @@ import (
 	"io"
 )
 
+// UUID is a 128 bit (16 byte) Universal Unique IDentifier.
 type UUID [16]byte
 
+// Nil is the Nil UUID.
 var Nil = UUID{}
 
 var (
-	NSDNS  UUID = Parse("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
-	NSURL  UUID = Parse("6ba7b811-9dad-11d1-80b4-00c04fd430c8")
-	NSOID  UUID = Parse("6ba7b812-9dad-11d1-80b4-00c04fd430c8")
+	// NSDNS is the IETF namespace for the DNS.
+	NSDNS UUID = Parse("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
+	// NSURL is the IETF namespace for the URL.
+	NSURL UUID = Parse("6ba7b811-9dad-11d1-80b4-00c04fd430c8")
+	// NSOID is the IETF namespace for the OID.
+	NSOID UUID = Parse("6ba7b812-9dad-11d1-80b4-00c04fd430c8")
+	// NSX500 is the IETF namespace for the X.500.
 	NSX500 UUID = Parse("6ba7b814-9dad-11d1-80b4-00c04fd430c8")
 )
 
