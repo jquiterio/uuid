@@ -1,5 +1,28 @@
 # UUID - RFC4122
 
+<p align="center">
+    <p>
+      <a href="https://github.com/jquiterio/uuid/actions/workflows/ci.yml?query=branch%3Amain">
+        <img src="https://github.com/jquiterio/uuid/actions/workflows/ci.yml/badge.svg" alt="Build Status">
+      </a>
+      <a href="https://codecov.io/gh/jquiterio/uuid/branch/main">
+        <img src="https://codecov.io/gh/jquiterio/uuid/branch/main/graph/badge.svg" alt="Code Coverage">
+      </a> 
+      <a href="https://goreportcard.com/report/jquiterio/uuid">
+        <img src="https://goreportcard.com/badge/jquiterio/uuid" alt="Go Report Card">
+      </a>
+      <a href="https://github.com/jquiterio/uuid/releases/latest">
+        <img src="https://img.shields.io/badge/version-2.7.0-blue.svg" alt="Release Version">
+      </a> 
+      <a href="https://pkg.go.dev/github.com/jquiterio/uuid/v2">
+        <img src="https://pkg.go.dev/badge/github.com/jquiterio/uuid" alt="GoDoc">
+      </a> 
+      <a href="LICENSE">
+        <img src="https://img.shields.io/github/license/jquiterio/uuid.svg" alt="License">
+      </a> 
+    </p>
+</p>
+
 ---
 
 Another UUID generator and parser for Go.
