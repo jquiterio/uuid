@@ -14,7 +14,7 @@
       <a href="https://github.com/jquiterio/uuid/releases/latest">
         <img src="https://img.shields.io/badge/version-2.7.0-blue.svg" alt="Release Version">
       </a> 
-      <a href="https://pkg.go.dev/github.com/jquiterio/uuid/v2">
+      <a href="https://pkg.go.dev/github.com/jquiterio/uuid">
         <img src="https://pkg.go.dev/badge/github.com/jquiterio/uuid" alt="GoDoc">
       </a> 
       <a href="LICENSE">
@@ -26,7 +26,7 @@
 ---
 
 Another UUID generator and parser for Go.
-It return Nil or UUID.
+Returns UUID or Nil
 
 ## Usage
 

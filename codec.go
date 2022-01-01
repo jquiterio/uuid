@@ -13,7 +13,6 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"errors"
-	"strings"
 )
 
 // NullUUID is a nullable UUID.
@@ -56,11 +55,12 @@ func (u UUID) String() string {
 
 // UnmarshalText implements the encoding.TextUnmarshaler interface.
 func (u *UUID) UnmarshalText(text string) error {
-	d := Parse([]byte(strings.ToLower(text)))
+	d := Parse(text)
 	if d == Nil {
 		return errors.New("uuid.UnmarshalText: Invalid UUID")
 	}
-	return u.UnmarshalBinary(d[:])
+	copy(u[:], d[:])
+	return nil
 }
 
 // UnmarshalBinary implements the encoding.BinaryUnmarshaler interface.
