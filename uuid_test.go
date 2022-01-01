@@ -12,14 +12,14 @@ import (
 )
 
 var (
-	v4_uuid string = "c5302009-7ff6-47d2-9a1c-72601da3e3e5"
-	v5_uuid string = "0b5bcdbf-1feb-5813-943d-8c325c7fe5bb"
+	v4uuid string = "c5302009-7ff6-47d2-9a1c-72601da3e3e5"
+	v5uuid string = "0b5bcdbf-1feb-5813-943d-8c325c7fe5bb"
 )
 
 func TestV4ParseString(t *testing.T) {
-	uuid := Parse(v4_uuid)
-	if uuid.String() != v4_uuid {
-		t.Errorf("Expected %s, got %s", v4_uuid, uuid.String())
+	uuid := Parse(v4uuid)
+	if uuid.String() != v4uuid {
+		t.Errorf("Expected %s, got %s", v4uuid, uuid.String())
 	} else {
 		t.Logf("uuid: %s", uuid.String())
 	}
@@ -35,9 +35,9 @@ func TestV4ParseBytes(t *testing.T) {
 }
 
 func TestV5ParseString(t *testing.T) {
-	uuid := Parse(v5_uuid)
-	if uuid.String() != v5_uuid {
-		t.Errorf("Expected %s, got %s", v5_uuid, uuid.String())
+	uuid := Parse(v5uuid)
+	if uuid.String() != v5uuid {
+		t.Errorf("Expected %s, got %s", v5uuid, uuid.String())
 	} else {
 		t.Logf("uuid: %s", uuid.String())
 	}
