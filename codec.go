@@ -16,8 +16,8 @@ import (
 
 // NullUUID is a nullable UUID.
 type NullUUID struct {
-	UUID  UUID
-	Valid bool
+	UUID  UUID `json:"uuid"`
+	Valid bool `json:"valid"`
 }
 
 // MarshalJSON implements the json.Marshaler interface.
@@ -38,7 +38,6 @@ func (u *UUID) UnmarshalJSON(b []byte) error {
 // String returns the UUID in it's canonical form, a 32
 func (u UUID) String() string {
 	buf := make([]byte, 36)
-
 	hex.Encode(buf[0:8], u[0:4])
 	buf[8] = '-'
 	hex.Encode(buf[9:13], u[4:6])
@@ -48,7 +47,6 @@ func (u UUID) String() string {
 	hex.Encode(buf[19:23], u[8:10])
 	buf[23] = '-'
 	hex.Encode(buf[24:], u[10:])
-
 	return string(buf)
 }
 

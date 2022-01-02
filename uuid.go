@@ -27,7 +27,7 @@ var (
 	NSURL UUID = Parse("6ba7b811-9dad-11d1-80b4-00c04fd430c8")
 	// NSOID is the IETF namespace for the OID.
 	NSOID UUID = Parse("6ba7b812-9dad-11d1-80b4-00c04fd430c8")
-	// NSX500 is the IETF namespace for the X.500.
+	// NSX500 is the IETF namespace for the X500.
 	NSX500 UUID = Parse("6ba7b814-9dad-11d1-80b4-00c04fd430c8")
 )
 

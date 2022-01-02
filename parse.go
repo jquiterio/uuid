@@ -23,7 +23,7 @@ func Parse(in interface{}) UUID {
 	u := UUID{}
 	switch in := in.(type) {
 	case string:
-		r, _ := regexp.Compile(`^(|{|urn:uuid:)([0-9a-fA-F]{8})\-([0-9a-fA-F]{4})\-([0-9a-fA-F]{4})\-([0-9a-fA-F]{4})\-([0-9a-fA-F]{12})(|})$`)
+		r, _ := regexp.Compile("^(|{|urn:uuid:)([0-9a-fA-F]{8})\-([0-9a-fA-F]{4})\-([0-9a-fA-F]{4})\-([0-9a-fA-F]{4})\-([0-9a-fA-F]{12})(|})$")
 		if r.MatchString(in) {
 			in = strings.Replace(in, "urn:uuid:", "", 1)
 			in = strings.Replace(in, "{", "", 1)
@@ -54,5 +54,4 @@ func Parse(in interface{}) UUID {
 	default:
 		return Nil
 	}
-
 }
