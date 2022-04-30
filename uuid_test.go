@@ -25,6 +25,13 @@ func TestV4ParseString(t *testing.T) {
 	}
 }
 
+func TestIsValid(t *testing.T) {
+	u := "something-ersds-derts-dd.re-rersd-dds"
+	if IsValid(u) != false {
+		t.Errorf("expected value %v, got %v", false, IsValid(u))
+	}
+}
+
 func TestV4ParseBytes(t *testing.T) {
 	u := NewV4()
 	b := u.Bytes()

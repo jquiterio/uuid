@@ -46,10 +46,14 @@ func main(){
 
   // Parse UUID
   // Get UUID from String
-  ufs := Parse("c5302009-7ff6-47d2-9a1c-72601da3e3e5")
+  ufs := uuid.Parse("c5302009-7ff6-47d2-9a1c-72601da3e3e5")
   ufs.String()
   // Get UUID from Bytes
   ufb := Parse(uuid.New().Bytes())
+
+  // IsValid: Check if UUID is Valid
+  uuid.IsValid("something") // may return false
+  uuid.IsValid("c5302009-7ff6-47d2-9a1c-72601da3e3e5") // take ufmay return true
 }
 ```
 

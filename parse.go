@@ -55,3 +55,7 @@ func Parse(in interface{}) UUID {
 		return Nil
 	}
 }
+
+func IsValid(in interface{}) bool {
+	return Parse(in) != Nil
+}
