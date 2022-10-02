@@ -8,6 +8,7 @@
 package uuid
 
 import (
+	"bytes"
 	"crypto/rand"
 	"crypto/sha1"
 	"hash"
@@ -117,4 +118,12 @@ func getHash(h hash.Hash, ns UUID, name []byte) UUID {
 // ToBytes returns the UUID as a byte slice.
 func (u UUID) ToBytes() []byte {
 	return u[:]
+}
+
+func Equal(u1, u2 UUID) bool {
+	return bytes.Equal(u1[:], u2[:])
+}
+
+func (u *UUID) Equal(u2 UUID) bool {
+	return Equal(*u, u2)
 }

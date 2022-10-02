@@ -32,6 +32,22 @@ func TestIsValid(t *testing.T) {
 	}
 }
 
+func TestEqual(t *testing.T) {
+	u := NewV4()
+	v := NewV4()
+	if u.Equal(v) {
+		t.Errorf("expected value %v, got %v", true, u.Equal(v))
+	}
+}
+
+func TestEqualUUID(t *testing.T) {
+	u1 := Parse("c5302009-7ff6-47d2-9a1c-72601da3e3e5")
+	u2 := Parse("c5302009-7ff6-47d2-9a1c-72601da3e3e5")
+	if !Equal(u1, u2) {
+		t.Errorf("expected value %v, got %v", false, Equal(u1, u2))
+	}
+}
+
 func TestV4ParseBytes(t *testing.T) {
 	u := NewV4()
 	b := u.Bytes()
