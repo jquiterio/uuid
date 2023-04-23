@@ -86,6 +86,10 @@ func New() UUID {
 	return NewV4()
 }
 
+func NewString() string {
+	return New().String()
+}
+
 // NewV4 returns a new random UUID.
 // It returns Nil if the input is not a valid UUID.
 func NewV4() UUID {
